@@ -74,8 +74,24 @@ const CarouselShared = ({
       <CarouselTitleContainer>
         <H2>{title}</H2>
       </CarouselTitleContainer>
-
-      <Slider {...settings}>
+      <Carousel
+        swipeable={false}
+        draggable={false}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlay={this.props.deviceType !== "mobile" ? true : false}
+        autoPlaySpeed={1000}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        deviceType={this.props.deviceType}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
         {carouselItems.map((item, index) => {
           return (
             <div key={item.title + index}>
@@ -110,7 +126,8 @@ const CarouselShared = ({
             </div>
           )
         })}
-      </Slider>
+      </Carousel>
+      ;
     </>
   )
 }
