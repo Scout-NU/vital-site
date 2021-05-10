@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import get from "lodash/get"
 import Layout from "../components/layout/layout"
 import SEO from "../components/seo"
-import Carousel from "../components/carousel-shared/carousel"
+import CarouselShared from "../components/carousel-shared/carousel"
 import Calendar from "../components/whats-happening/calendar"
 import Slack from "../components/whats-happening/slack"
 import Header from "../components/header/header"
@@ -22,7 +22,7 @@ const WhatsHappening = props => {
         subheading={whatsHappening.subheadingForTitle}
         imageBool={true}
       />
-      <Carousel
+      <CarouselShared
         title={whatsHappening.carouselTitle}
         carouselItems={whatsHappening.carouselItems}
         minItems={3}

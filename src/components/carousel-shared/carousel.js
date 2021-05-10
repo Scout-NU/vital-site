@@ -1,5 +1,6 @@
 import React from "react"
-import TinySlider from "tiny-slider-react"
+import Carousel from "react-multi-carousel"
+import "react-multi-carousel/lib/styles.css"
 import { H2, P, PCard } from "../../constants/typography"
 import {
   CarouselTitleContainer,
@@ -17,12 +18,14 @@ import {
   PlaceholderText,
 } from "./carousel-styles"
 import "./carousel.css"
-
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 import union from "../../images/union-right.svg"
 import longRightArrow from "../../images/long-right-arrow.svg"
 import carouselPlaceholder from "../../images/carousel-placeholder.png"
 
-const Carousel = ({
+const CarouselShared = ({
   title,
   carouselItems,
   minItems,
@@ -41,29 +44,38 @@ const Carousel = ({
   }
 
   const settings = {
-    center: true,
-    controlsPosition: "bottom",
-    navPosition: "bottom",
-    navContainer: "#customize-nav",
-    controlsContainer: "#customize-controls",
-    mouseDrag: true,
-    responsive: {
-      0: {
-        edgePadding: 50,
-      },
-      768: {
-        fixedWidth: 800,
-        edgePadding: 200,
-      },
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+  }
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
     },
   }
+
   return (
     <>
       <CarouselTitleContainer>
         <H2>{title}</H2>
       </CarouselTitleContainer>
 
-      <TinySlider settings={settings}>
+      <Slider {...settings}>
         {carouselItems.map((item, index) => {
           return (
             <div key={item.title + index}>
@@ -98,31 +110,9 @@ const Carousel = ({
             </div>
           )
         })}
-      </TinySlider>
-
-      <CarouselButtonsContainer>
-        <CarouselNav id="customize-nav">
-          {carouselItems.map((item, index) => {
-            return <NavButtons key={item.title + index + "btn"}></NavButtons>
-          })}
-        </CarouselNav>
-        <CarouselControls id="customize-controls">
-          <Control
-            src={union}
-            direction={"left"}
-            alt={"left (previous) arrow control"}
-            numberOfItems={carouselItems.length}
-          ></Control>
-          <Control
-            src={union}
-            alt={"right (next) arrow control"}
-            direction={"right"}
-            numberOfItems={carouselItems.length}
-          ></Control>
-        </CarouselControls>
-      </CarouselButtonsContainer>
+      </Slider>
     </>
   )
 }
 
-export default Carousel
+export default CarouselShared
