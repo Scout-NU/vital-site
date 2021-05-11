@@ -6,7 +6,8 @@ import {
 } from "./social-media-styles"
 
 const SocialMedia = ({ instaLink, facebookPage, title }) => {
-  const embedLink = "https://www.instagram.com/p/COf2vGdFalz/embed"
+  const postLink = "https://www.instagram.com/p/COf2vGdFalz/"
+  const embedLink = `${postLink}embed`
 
   return (
     <SocialMediaSectionContainer>
